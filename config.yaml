@@ -1,0 +1,52 @@
+# Configuration for Personalized AI Health Assistant
+
+# Data paths
+data:
+  medical_history: "data/medical_history.csv"
+  wearable_data: "data/wearable_data.csv"
+  medical_images: "data/images/"
+  output_dir: "outputs/"
+  models_dir: "models/"
+
+# Data columns
+columns:
+  medical_history: "medical_history"
+  time_series: ["heart_rate", "steps", "sleep_hours", "calories"]
+  target: "disease_label"
+
+# Model parameters
+model:
+  text_embedding_dim: 768  # BERT base dimension
+  text_dense_units: 128
+  ts_conv_filters: 64
+  ts_conv_kernel: 3
+  ts_lstm_units: 64
+  fusion_dense_units: 128
+  dropout_rate: 0.3
+  learning_rate: 0.001
+  
+# Training parameters
+training:
+  epochs: 50
+  batch_size: 32
+  validation_split: 0.15
+  test_split: 0.15
+  early_stopping_patience: 10
+  random_seed: 42
+
+# Image processing
+image:
+  target_size: [224, 224]
+  use_pretrained: true
+  pretrained_model: "ResNet50"
+  
+# Logging
+logging:
+  level: "INFO"
+  log_file: "outputs/training.log"
+  
+# SHAP explanation
+explainability:
+  num_samples: 100
+  save_plots: true
+  plot_dir: "outputs/explanations/"
